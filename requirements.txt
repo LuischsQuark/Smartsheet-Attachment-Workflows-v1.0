@@ -1,0 +1,12 @@
+# Install Python (if needed)
+python>=3.8
+
+# Core dependencies
+flask
+requests
+
+# Environment variable management
+python-dotenv
+
+# Flask session management
+Flask-Session
