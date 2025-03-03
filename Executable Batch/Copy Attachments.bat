@@ -1,5 +1,5 @@
 @echo off
-cd /d C:\Users\lchavessolis\Documents\SMAR-Attach-wfls
+cd /d C:\Users\lchavessolis\Documents\SMAR-Attach-wfls\Smartsheet-Attachment-Workflos\Attachment-Copy
 set API_ACCESS_KEY=my_secure_api_key
 start /min cmd /k python copyattachments.py
 timeout /t 5

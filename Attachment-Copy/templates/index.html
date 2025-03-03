@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Move Attachments - Smartsheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F4F5F7;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .hidden {
+            display: none;
+        }
+        button {
+            background-color: #0078D4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+        button:disabled {
+            background-color: #A0A0A0;
+            cursor: not-allowed;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #0078D4;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .logo {
+            display: block;
+            margin: 20px auto;
+            width: 150px;
+        }
+        .input-container {
+            margin-bottom: 15px;
+        }
+        input {
+            padding: 10px;
+            font-size: 14px;
+            width: 250px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #startButton {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="tokenContainer">
+        <h2>Enter Smartsheet API Access Token</h2>
+        <input type="password" id="accessToken" placeholder="Access Token">
+        <button onclick="submitToken()">Submit</button>
+        <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+    
+    <div class="container hidden" id="mainContainer">
+        <h2>Verify Attachments</h2>
+        <div>
+            <input type="text" id="sourceSheetId" placeholder="Source Sheet ID">
+            <input type="text" id="targetSheetId" placeholder="Target Sheet ID">
+        </div>
+        <button onclick="verifyAttachments()">Verify</button>
+        <div id="loading" style="display:none;">Loading...</div>
+        <table id="attachmentsTable"></table>
+        <button id="startButton" class="hidden" onclick="startTransfer()">Start</button>
+    </div>
+    
+    <script>
+        const API_KEY = "my_secure_api_key"; // Should be replaced dynamically in production
+        
+        function showError(message) {
+            let errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = message;
+            errorMessage.classList.remove("hidden");
+        }
+        
+        function submitToken() {
+            let accessToken = document.getElementById("accessToken").value.trim();
+            if (!accessToken) {
+                showError("Please enter a valid Access Token.");
+                return;
+            }
+            fetch("/set_token", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "API-Key": API_KEY
+                },
+                body: JSON.stringify({ accessToken })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    showError(data.error);
+                } else {
+                    document.getElementById("tokenContainer").classList.add("hidden");
+                    document.getElementById("mainContainer").classList.remove("hidden");
+                }
+            })
+            .catch(error => {
+                showError("An error occurred while setting the token.");
+                console.error("Token Error:", error);
+            });
+        }
+        
+        function verifyAttachments() {
+            document.getElementById("loading").style.display = "block";
+            fetch("/verify_attachments", {
+                method: "POST",
+                headers: {
+                   "Content-Type": "application/json",
+                   "API-Key": "my_secure_api_key"  // Replace with the actual API key
+        },
+        body: JSON.stringify({
+            sourceSheetId: document.getElementById("sourceSheetId").value,
+            targetSheetId: document.getElementById("targetSheetId").value
+               })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("loading").style.display = "none";
+                let table = document.getElementById("attachmentsTable");
+                table.innerHTML = "";
+                if (!data.attachments || data.attachments.length === 0) {
+                    alert("No attachments found.");
+                    return;
+                }
+                let headerRow = table.insertRow();
+                headerRow.innerHTML = `
+                    <th>Select</th>
+                    <th>Attachment ID</th>
+                    <th>Attachment Name</th>
+                    <th>Version</th>
+                    <th>Source Sheet</th>
+                    <th>Source Task</th>
+                    <th>Destination Task</th>
+                    <th>Destination Sheet</th>
+                `;
+                data.attachments.forEach(att => {
+                    let row = table.insertRow();
+                    row.innerHTML = `
+                        <td><input type='checkbox' class='attachmentCheckbox' data-attachment='${JSON.stringify(att)}'></td>
+                        <td>${att.attachmentId}</td>
+                        <td>${att.attachmentName}</td>
+                        <td>${att.version}</td>
+                        <td>${att.sourceSheetName}</td>
+                        <td>${att.sourceTaskName}</td>
+                        <td>${att.sourceTaskName}</td>
+                        <td>${att.destinationSheetName}</td>
+                    `;
+                });
+                document.getElementById("startButton").style.display = "inline-block";
+            });
+        }
+
+        function startTransfer() {
+            document.getElementById("loading").style.display = "block";
+            let selectedAttachments = [];
+    
+            document.querySelectorAll(".attachmentCheckbox:checked").forEach(cb => {
+                selectedAttachments.push(JSON.parse(cb.dataset.attachment));
+            });
+
+            fetch("/transfer_attachments", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "API-Key": "my_secure_api_key"  // Ensure this matches the backend API key
+                },
+                body: JSON.stringify({
+                    attachments: selectedAttachments,
+                    sourceSheetId: document.getElementById("sourceSheetId").value,
+                    targetSheetId: document.getElementById("targetSheetId").value
+               })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("loading").style.display = "none";
+                if (data.prompt) {
+                    let confirmUpload = confirm(`${data.prompt} (File: ${data.fileName})`);
+                    if (confirmUpload) {
+                        uploadNewVersion(data.attachmentId);
+                    } else {
+                        alert("Process canceled. Returning to verification page.");
+                        verifyAttachments();
+                    }
+                } else if (data.error) {
+                    alert("Error: " + data.error);
+                } else {
+                    alert("Process completed successfully!");
+                }
+            })
+            .catch(error => {
+                document.getElementById("loading").style.display = "none";
+                alert("An error occurred while transferring attachments.");
+                console.error("Transfer Error:", error);
+            });
+        }
+
+        function uploadNewVersion(attachmentId) {
+            document.getElementById("loading").style.display = "block";
+    
+            fetch("/upload_new_version", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "API-Key": "my_secure_api_key"  // Ensure this matches your backend API key
+                },
+                body: JSON.stringify({
+                    targetSheetId: document.getElementById("targetSheetId").value,
+                    attachmentId: attachmentId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("loading").style.display = "none";
+                if (data.error) {
+                    alert("Error: " + data.error);
+                } else {
+                    alert("New version uploaded successfully!");
+                    verifyAttachments();  // Refresh the table
+                }
+            })
+            .catch(error => {
+                document.getElementById("loading").style.display = "none";
+                alert("An error occurred while uploading the new version.");
+                console.error("Upload Error:", error);
+             });
+         }
+    </script>
+</body>
+</html>
+
