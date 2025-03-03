@@ -46,7 +46,13 @@ API_ACCESS_KEY=your_api_key
 
 ### **1. Run the Application**
 
-Start the Flask app with:
+To Copy attachments, start the Flask app with:
+
+```sh
+python copyattachments.py
+```
+
+To Move attachments, start the Flask app with:
 
 ```sh
 python moveattachments.py
