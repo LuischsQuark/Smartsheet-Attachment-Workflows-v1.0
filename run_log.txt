@@ -1,0 +1,317 @@
+Error fetching rows: 500 Server Error: Internal Server Error for url: https://api.smartsheet.com/2.0/sheets/None
+Error fetching rows: 500 Server Error: Internal Server Error for url: https://api.smartsheet.com/2.0/sheets/None
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 124, in start_transfer
+    file_content = download_attachment(attachment['sourceSheetName'], attachment['attachmentId'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 63, in download_attachment
+    response.raise_for_status()
+  File "C:\Users\lchavessolis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.smartsheet.com/2.0/sheets/5143829279625092/attachments/8114604747296644/download
+
+Error fetching attachments: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092/attachments (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Target row not found for 5
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 125, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment['attachmentId'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 63, in download_attachment
+    response.raise_for_status()
+  File "C:\Users\lchavessolis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.smartsheet.com/2.0/sheets/5143829279625092/attachments/8114604747296644/download
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 125, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment['attachmentId'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 63, in download_attachment
+    response.raise_for_status()
+  File "C:\Users\lchavessolis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.smartsheet.com/2.0/sheets/5143829279625092/attachments/8114604747296644/download
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 125, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment['attachmentId'])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 63, in download_attachment
+    response.raise_for_status()
+  File "C:\Users\lchavessolis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.smartsheet.com/2.0/sheets/5143829279625092/attachments/8114604747296644/download
+
+ERROR: Target row not found for 5
+ERROR: Target row not found for 5
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+ERROR: Target row not found for 5
+Downloaded: Critical Path Test NEW (2).xlsx
+ERROR: Target row not found for 5
+Downloaded: Critical Path Test NEW (2).xlsx
+ERROR: Target row not found for 5
+Downloaded: Critical Path Test NEW (2).xlsx
+ERROR: Target row not found for 5
+Downloaded: Critical Path Test NEW (2).xlsx
+ERROR: Target row not found for 5
+Downloaded: Critical Path Test NEW (2).xlsx
+SUCCESS: Uploaded Critical Path Test NEW (2).xlsx to row 4640290416332676 in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+SUCCESS: Uploaded Critical Path Test NEW (2).xlsx to row 4640290416332676 in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 34, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^
+NameError: name 'get_attachments' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 34, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^
+NameError: name 'get_attachments' is not defined
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 6880375724085124
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\flaskattachments.py", line 170, in upload_new_version
+    response = upload_attachment_version(target_sheet_id, attachment_id, file_name, file_content, 'application/octet-stream')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'upload_attachment_version' is not defined
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 6880375724085124
+ERROR: Failed to upload new version of None: 400 Client Error: Bad Request for url: https://api.smartsheet.com/2.0/sheets/2118720604295044/attachments/6880375724085124/versions
+SUCCESS: Uploaded new version of None in sheet 2118720604295044
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/2118720604295044 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+NOT FOUND: Attachment 'Critical Path Test NEW (2).xlsx' does not exist in row 4640290416332676 of sheet 2118720604295044.
+SUCCESS: Uploaded Critical Path Test NEW (2).xlsx to row 4640290416332676 in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7511142674239364
+ERROR: Failed to upload new version of None: 400 Client Error: Bad Request for url: https://api.smartsheet.com/2.0/sheets/2118720604295044/attachments/7511142674239364/versions
+SUCCESS: Uploaded new version of None in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7511142674239364
+Attempting to upload new version: File Name: None, Attachment ID: 7511142674239364, Sheet ID: 2118720604295044
+ERROR: Missing file name or attachment ID.
+Error fetching attachments: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092/attachments (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7511142674239364
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload!
+Attempting to upload new version: File Name: None, Attachment ID: 7511142674239364, Sheet ID: 2118720604295044
+ERROR: Missing file name or attachment ID.
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7511142674239364
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload!
+Attempting to upload new version: File Name: None, Attachment ID: 7511142674239364, Sheet ID: 2118720604295044
+ERROR: Missing file name or attachment ID.
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7511142674239364
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 7511142674239364, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Downloaded: Smartsheet Loading Msg.JPEG
+Checking if attachment 'Smartsheet Loading Msg.JPEG' exists in row 4640290416332676 of sheet 2118720604295044...
+NOT FOUND: Attachment 'Smartsheet Loading Msg.JPEG' does not exist in row 4640290416332676 of sheet 2118720604295044.
+SUCCESS: Uploaded Smartsheet Loading Msg.JPEG to row 4640290416332676 in sheet 2118720604295044
+Error fetching attachments: 500 Server Error: Internal Server Error for url: https://api.smartsheet.com/2.0/sheets//attachments
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/2118720604295044 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Downloaded: Smartsheet Loading Msg.JPEG
+Checking if attachment 'Smartsheet Loading Msg.JPEG' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Smartsheet Loading Msg.JPEG' already exists with ID 8126869185793924
+Attachment exists. Prompting UI for new version upload: Smartsheet Loading Msg.JPEG
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Error fetching attachments: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/2118720604295044/attachments (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Attempting to upload new version: File Name: None, Attachment ID: 8126869185793924, Sheet ID: 2118720604295044
+ERROR: Missing file name or attachment ID.
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Error fetching rows: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/2118720604295044 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)')))
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 5424888616882052
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 5424888616882052, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Downloaded: Smartsheet Loading Msg.JPEG
+Checking if attachment 'Smartsheet Loading Msg.JPEG' exists in row 4640290416332676 of sheet 2118720604295044...
+FOUND: Attachment 'Smartsheet Loading Msg.JPEG' already exists with ID 8126869185793924
+Attachment exists. Prompting UI for new version upload: Smartsheet Loading Msg.JPEG
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Smartsheet Loading Msg.JPEG
+Attempting to upload new version: File Name: Smartsheet Loading Msg.JPEG, Attachment ID: 8126869185793924, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Smartsheet Loading Msg.JPEG in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 136690788962180 of sheet 2118720604295044...
+NOT FOUND: Attachment 'Critical Path Test NEW (2).xlsx' does not exist in row 136690788962180 of sheet 2118720604295044.
+SUCCESS: Uploaded Critical Path Test NEW (2).xlsx to row 136690788962180 in sheet 2118720604295044
+SUCCESS: Deleted attachment ID 1459760556969860 from sheet 5143829279625092
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+NOT FOUND: Attachment 'Critical Path Test NEW (2).xlsx' does not exist in row 2388490602647428 of sheet 2118720604295044.
+SUCCESS: Uploaded Critical Path Test NEW (2).xlsx to row 2388490602647428 in sheet 2118720604295044
+SUCCESS: Deleted attachment ID 4604136539852676 from sheet 5143829279625092
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\moveattachments.py", line 212, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\moveattachments.py", line 63, in download_attachment
+    response.raise_for_status()
+  File "C:\Users\lchavessolis\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\site-packages\requests\models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.smartsheet.com/2.0/sheets/5143829279625092/attachments/4604136539852676
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 6014657419841412
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 6014657419841412, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 88, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 30, in get_attachments
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 88, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 30, in get_attachments
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 88, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 30, in get_attachments
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 88, in verify_attachments
+    attachments = get_attachments(source_sheet_id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 30, in get_attachments
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 7509569105596292
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 7509569105596292, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 5472598187347844
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 5472598187347844, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Error fetching attachments: 500 Server Error: Internal Server Error for url: https://api.smartsheet.com/2.0/sheets//attachments
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 8597460699352964
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 8597460699352964, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 138, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment_id)
+                   ^^^^^^^^^^^^^^^^^^^
+NameError: name 'download_attachment' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 187, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 81, in download_attachment
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 193, in transfer_attachments
+    file_content = download_attachment(source_sheet_id, attachment_id)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 84, in download_attachment
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+API request failed: HTTPSConnectionPool(host='api.smartsheet.com', port=443): Max retries exceeded with url: /2.0/sheets/5143829279625092/attachments (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)'))), attempt 1/3
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 1275301668884356, Sheet ID: 2118720604295044
+Traceback (most recent call last):
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 206, in upload_new_version
+    response = upload_attachment_version(target_sheet_id, attachment_id, file_name, file_content, 'application/octet-stream')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lchavessolis\Documents\Python dlete\copyattachments.py", line 164, in upload_attachment_version
+    headers = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
+                                          ^^^^^^^^^^^^
+NameError: name 'ACCESS_TOKEN' is not defined
+
+Downloaded: Critical Path Test NEW (2).xlsx
+Checking if attachment 'Critical Path Test NEW (2).xlsx' exists in row 2388490602647428 of sheet 2118720604295044...
+FOUND: Attachment 'Critical Path Test NEW (2).xlsx' already exists with ID 1275301668884356
+Attachment exists. Prompting UI for new version upload: Critical Path Test NEW (2).xlsx
+ERROR: file_name is missing from request payload! Attempting to retrieve from source.
+Retrieved file name from source: Critical Path Test NEW (2).xlsx
+Attempting to upload new version: File Name: Critical Path Test NEW (2).xlsx, Attachment ID: 1275301668884356, Sheet ID: 2118720604295044
+SUCCESS: Uploaded new version of Critical Path Test NEW (2).xlsx in sheet 2118720604295044
