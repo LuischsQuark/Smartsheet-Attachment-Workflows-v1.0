@@ -4,6 +4,8 @@
 
 This project provides a Flask-based web application to facilitate the secure transfer of attachments between Smartsheet sheets. The application interacts with the Smartsheet API to verify, download, and upload attachments while ensuring data integrity and access control.
 
+**Note:** Using the **moveattachments** script does not make a straight move, it takes the attchment from the source and adds it into the target row and then it deletes the original file from the source once the process is complete. 
+
 ## Features
 
 - 🔑 **Secure API authentication** using API keys and session tokens.
@@ -99,6 +101,7 @@ http://127.0.0.1:5000
 - Enhanced UI for better user experience.
 - OAuth authentication for improved security.
 - Advanced error handling and notifications.
+- Include an option to choose the target Task Name instead of using an exact match to increase use-cases.
 
 ## Contributing
 
