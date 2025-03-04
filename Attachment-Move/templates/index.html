@@ -195,79 +195,95 @@
         }
 
         function startTransfer() {
-            document.getElementById("loading").style.display = "block";
-            let selectedAttachments = [];
-    
-            document.querySelectorAll(".attachmentCheckbox:checked").forEach(cb => {
-                selectedAttachments.push(JSON.parse(cb.dataset.attachment));
-            });
+    document.getElementById("loading").style.display = "block";
+    let selectedAttachments = [];
 
-            fetch("/transfer_attachments", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "API-Key": "my_secure_api_key"  // Ensure this matches the backend API key
-                },
-                body: JSON.stringify({
-                    attachments: selectedAttachments,
-                    sourceSheetId: document.getElementById("sourceSheetId").value,
-                    targetSheetId: document.getElementById("targetSheetId").value
-               })
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("loading").style.display = "none";
-                if (data.prompt) {
-                    let confirmUpload = confirm(`${data.prompt} (File: ${data.fileName})`);
-                    if (confirmUpload) {
-                        uploadNewVersion(data.attachmentId);
-                    } else {
-                        alert("Process canceled. Returning to verification page.");
-                        verifyAttachments();
-                    }
-                } else if (data.error) {
-                    alert("Error: " + data.error);
-                } else {
-                    alert("Process completed successfully!");
-                }
-            })
-            .catch(error => {
-                document.getElementById("loading").style.display = "none";
-                alert("An error occurred while transferring attachments.");
-                console.error("Transfer Error:", error);
-            });
+    document.querySelectorAll(".attachmentCheckbox:checked").forEach(cb => {
+        selectedAttachments.push(JSON.parse(cb.dataset.attachment));
+    });
+
+    function processAttachments(index) {
+        if (index >= selectedAttachments.length) {
+            document.getElementById("loading").style.display = "none";
+            alert("Process completed successfully!");
+            return;
         }
 
-        function uploadNewVersion(attachmentId) {
-            document.getElementById("loading").style.display = "block";
-    
-            fetch("/upload_new_version", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "API-Key": "my_secure_api_key"  // Ensure this matches your backend API key
-                },
-                body: JSON.stringify({
-                    targetSheetId: document.getElementById("targetSheetId").value,
-                    attachmentId: attachmentId
-                })
+        let attachment = selectedAttachments[index];
+
+        fetch("/transfer_attachments", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "API-Key": "my_secure_api_key"
+            },
+            body: JSON.stringify({
+                attachments: [attachment], // Send one attachment at a time
+                sourceSheetId: document.getElementById("sourceSheetId").value,
+                targetSheetId: document.getElementById("targetSheetId").value
             })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("loading").style.display = "none";
-                if (data.error) {
-                    alert("Error: " + data.error);
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Server Response:", data); // Debugging log
+
+            if (data.prompt) {
+                let confirmUpload = confirm(`${data.prompt} (File: ${data.fileName})`);
+                if (confirmUpload) {
+                    uploadNewVersion(data.attachmentId, () => processAttachments(index + 1));
                 } else {
-                    alert("New version uploaded successfully!");
-                    verifyAttachments();  // Refresh the table
+                    alert("Skipped update for: " + data.fileName);
+                    processAttachments(index + 1);
                 }
-            })
-            .catch(error => {
-                document.getElementById("loading").style.display = "none";
-                alert("An error occurred while uploading the new version.");
-                console.error("Upload Error:", error);
-             });
-         }
+            } else if (data.error) {
+                alert("Error: " + data.error);
+                processAttachments(index + 1);
+            } else {
+                processAttachments(index + 1);
+            }
+        })
+        .catch(error => {
+            document.getElementById("loading").style.display = "none";
+            alert("An error occurred while transferring attachments.");
+            console.error("Transfer Error:", error);
+        });
+    }
+
+    processAttachments(0);
+}
+
+function uploadNewVersion(attachmentId, callback) {
+    document.getElementById("loading").style.display = "block";
+
+    fetch("/upload_new_version", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "API-Key": "my_secure_api_key"
+        },
+        body: JSON.stringify({
+            targetSheetId: document.getElementById("targetSheetId").value,
+            attachmentId: attachmentId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("loading").style.display = "none";
+        if (data.error) {
+            alert("Error: " + data.error);
+        } else {
+            alert("New version uploaded successfully!");
+        }
+        callback();  // Continue processing the next attachment
+    })
+    .catch(error => {
+        document.getElementById("loading").style.display = "none";
+        alert("An error occurred while uploading the new version.");
+        console.error("Upload Error:", error);
+        callback();
+    });
+}
+
     </script>
 </body>
 </html>
