@@ -211,8 +211,8 @@ def upload_new_version():
             return jsonify({"error": "Failed to upload new version."}), 500
     except Exception as e:
         log_message(traceback.format_exc())
-        return jsonify({"error": str(e)}), 500
-
+        return jsonify({"error": str(e)}), 500        
+        
 @app.route('/transfer_attachments', methods=['POST'])
 @require_api_key
 def transfer_attachments():
@@ -222,38 +222,55 @@ def transfer_attachments():
         target_sheet_id = data.get('targetSheetId')
         source_sheet_id = data.get('sourceSheetId')
         target_rows = get_rows(target_sheet_id)
-        
+
+        attachments_to_update = []  # Store attachments that need updating
+        attachments_uploaded = 0  # Counter for new uploads
+
         for attachment in selected_attachments:
             attachment_id = attachment['attachmentId']
             file_name = attachment.get('attachmentName')
             destination_task_name = attachment['destinationTaskName']
-            
+
             if not file_name:
                 log_message(f"ERROR: Missing file name for attachment ID {attachment_id}")
                 continue
-            
+
             file_content = download_attachment(source_sheet_id, attachment_id)
             log_message(f"Downloaded: {file_name}")
-            
+
             target_row_id = find_row_by_column_value(destination_task_name, target_rows)
-            
+
             if not target_row_id:
                 log_message(f"ERROR: Target row not found for {destination_task_name}")
                 continue
-            
+
             existing_attachment_id = check_attachment_exists(target_sheet_id, target_row_id, file_name)
-            
+
             if existing_attachment_id:
-                log_message(f"Attachment exists. Prompting UI for new version upload: {file_name}")
-                return jsonify({"prompt": "Attachment already exists. Upload a new version?", "attachmentId": existing_attachment_id, "fileName": file_name})
-            
+                log_message(f"Attachment '{file_name}' exists. Prompting UI for new version upload.")
+                return jsonify({
+                    "prompt": "Attachment already exists. Do you want to upload a new version?",
+                    "attachmentId": existing_attachment_id,
+                    "fileName": file_name
+                })
+
+            # Upload new attachment
             response = upload_attachment_to_row(target_sheet_id, target_row_id, file_name, file_content, 'application/octet-stream')
-            log_message(f"SUCCESS: Uploaded {file_name} to row {target_row_id} in sheet {target_sheet_id}")
-        
-        return jsonify({"message": "Process completed successfully!"})
+
+            if response:
+                log_message(f"SUCCESS: Uploaded {file_name} to row {target_row_id} in sheet {target_sheet_id}")
+                delete_attachment(source_sheet_id, attachment_id)  # Delete from source after successful transfer
+                attachments_uploaded += 1
+            else:
+                log_message(f"ERROR: Upload failed for {file_name}. Skipping deletion.")
+
+        return jsonify({"message": f"Process completed successfully! {attachments_uploaded} new uploads."})
+
     except Exception as e:
         log_message(traceback.format_exc())
         return jsonify({"error": str(e)}), 500
+
+        
 
 if __name__ == '__main__':
     app.run(debug=True)
